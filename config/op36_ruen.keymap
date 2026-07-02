@@ -38,6 +38,15 @@
             hold-trigger-key-positions = <0 1 2 3 4 10 11 12 13 14 20 21 22 23 24 30 31 32>;
             hold-trigger-on-release;
         };
+
+        lg_space: lg_space {
+            compatible = "zmk,behavior-mod-morph";
+            label = "toggle 'ru' layer with LGUI";
+            bindings = <&kp SPACE>, <&lg_tog>;
+
+            #binding-cells = <0>;
+            mods = <(MOD_LGUI|MOD_RGUI)>;
+        };
     };
 
     combos {
@@ -55,16 +64,16 @@
             layers = <1>;
         };
 
-        cmben {
-            bindings = <&layer_en>;
-            key-positions = <2 3>;
+        ru_io {
+            bindings = <&kp RU_CYRILLIC_IO>;
+            key-positions = <3 4>;
             layers = <1>;
         };
 
-        cmbru {
-            bindings = <&layer_ru>;
+        cmbenru {
+            bindings = <&tog 1>;
             key-positions = <2 3>;
-            layers = <0>;
+            layers = <0 1>;
         };
     };
 
@@ -72,7 +81,7 @@
         to_ru: to_ru {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&kp LS(LC(N2))>;
+            bindings = <&kp LG(SPACE)>;
             label = "TO_RU";
             wait-ms = <0>;
             tap-ms = <30>;
@@ -81,7 +90,7 @@
         to_en: to_en {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&kp LS(LC(N1))>;
+            bindings = <&kp LG(SPACE)>;
             label = "TO_EN";
             wait-ms = <0>;
             tap-ms = <30>;
@@ -122,6 +131,13 @@
             wait-ms = <0>;
             tap-ms = <30>;
         };
+
+        lg_tog: lg_tog {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LG(SPACE) &tog 1>;
+            label = "LG_TOG";
+        };
     };
 
     keymap {
@@ -129,10 +145,10 @@
 
         en {
             bindings = <
-  &kp Q         &kp W        &kp E         &kp R          &kp T                          &kp Y  &kp U        &kp I         &kp O        &kp P
-  &hml LCTRL A  &hml LALT S  &hml LSHFT D  &hml LCMD F    &kp G                          &kp H  &hmr RGUI J  &hmr RSHFT K  &hmr LALT L  &hmr RCTRL SEMICOLON
-  &kp Z         &kp X        &kp C         &kp V          &kp B                          &kp N  &kp M        &kp COMMA     &kp DOT      &kp SQT
-                                           &kp BACKSPACE  &mo 4  &kp SPACE    &kp ENTER  &mo 2  &kp TAB
+  &kp Q         &kp W        &kp E        &kp R          &kp T                          &kp Y  &kp U         &kp I        &kp O        &kp P
+  &hml LCTRL A  &hml LALT S  &hml LGUI D  &hml LSHFT F   &kp G                          &kp H  &hmr RSHFT J  &hmr RGUI K  &hmr LALT L  &hmr RCTRL SEMICOLON
+  &kp Z         &kp X        &kp C        &kp V          &kp B                          &kp N  &kp M         &kp COMMA    &kp DOT      &kp SQT
+                                          &kp BACKSPACE  &mo 4  &lg_space    &kp ENTER  &mo 2  &kp TAB
             >;
 
             display-name = "Base";
@@ -140,10 +156,10 @@
 
         ru {
             bindings = <
-  &kp RU_CYRILLIC_SHORT_I    &kp RU_CYRILLIC_TSE         &kp RU_CYRILLIC_U          &kp RU_CYRILLIC_KA       &kp RU_CYRILLIC_IE                          &kp RU_CYRILLIC_EN  &kp RU_CYRILLIC_GHE        &kp RU_CYRILLIC_SHA        &kp RU_CYRILLIC_SHCHA     &kp RU_CYRILLIC_ZE
-  &hml LCTRL RU_CYRILLIC_EF  &hml LALT RU_CYRILLIC_YERU  &hml LSHFT RU_CYRILLIC_VE  &hml LGUI RU_CYRILLIC_A  &kp RU_CYRILLIC_PE                          &kp RU_CYRILLIC_ER  &hmr RGUI RU_CYRILLIC_O    &hmr RSHFT RU_CYRILLIC_EL  &hmr LALT RU_CYRILLIC_DE  &hmr RCTRL RU_CYRILLIC_ZHE
-  &kp RU_CYRILLIC_YA         &kp RU_CYRILLIC_CHE         &kp RU_CYRILLIC_ES         &kp RU_CYRILLIC_EM       &kp RU_CYRILLIC_I                           &kp RU_CYRILLIC_TE  &kp RU_CYRILLIC_SOFT_SIGN  &kp RU_CYRILLIC_BE         &kp RU_CYRILLIC_YU        &kp RU_CYRILLIC_E
-                                                                                    &kp BACKSPACE            &mo 4               &kp SPACE    &kp ENTER  &mo 3               &kp TAB
+  &kp RU_CYRILLIC_SHORT_I    &kp RU_CYRILLIC_TSE         &kp RU_CYRILLIC_U         &kp RU_CYRILLIC_KA        &kp RU_CYRILLIC_IE                          &kp RU_CYRILLIC_EN  &kp RU_CYRILLIC_GHE        &kp RU_CYRILLIC_SHA       &kp RU_CYRILLIC_SHCHA     &kp RU_CYRILLIC_ZE
+  &hml LCTRL RU_CYRILLIC_EF  &hml LALT RU_CYRILLIC_YERU  &hml LGUI RU_CYRILLIC_VE  &hml LSHFT RU_CYRILLIC_A  &kp RU_CYRILLIC_PE                          &kp RU_CYRILLIC_ER  &hmr RSHFT RU_CYRILLIC_O   &hmr RGUI RU_CYRILLIC_EL  &hmr LALT RU_CYRILLIC_DE  &hmr RCTRL RU_CYRILLIC_ZHE
+  &kp RU_CYRILLIC_YA         &kp RU_CYRILLIC_CHE         &kp RU_CYRILLIC_ES        &kp RU_CYRILLIC_EM        &kp RU_CYRILLIC_I                           &kp RU_CYRILLIC_TE  &kp RU_CYRILLIC_SOFT_SIGN  &kp RU_CYRILLIC_BE        &kp RU_CYRILLIC_YU        &kp RU_CYRILLIC_E
+                                                                                   &kp BACKSPACE             &mo 4               &lg_space    &kp ENTER  &mo 3               &kp TAB
             >;
 
             display-name = "Ru";
@@ -151,10 +167,10 @@
 
         sym_en {
             bindings = <
-  &kp TILDE        &kp LT          &kp EQUAL         &kp GT          &kp GRAVE                    &kp CARET  &kp LBKT        &kp UNDER        &kp RBKT        &kp DLLR
-  &hml LCTRL BSLH  &hml LALT LPAR  &hml LSHFT MINUS  &hml LGUI RPAR  &kp PLUS                     &kp PRCNT  &hmr RGUI LBRC  &hmr RSHFT SEMI  &hmr LALT RBRC  &hmr RCTRL EXCL
-  &kp HASH         &kp STAR        &kp COLON         &kp FSLH        &kp AMPS                     &kp AT     &kp PIPE        &kp COMMA        &kp DOT         &kp QMARK
-                                                     &trans          &mo 5      &trans    &trans  &none      &trans
+  &kp TILDE        &kp LT          &kp EQUAL        &kp GT           &kp GRAVE                    &kp CARET  &kp LBKT         &kp UNDER       &kp RBKT        &kp DLLR
+  &hml LCTRL BSLH  &hml LALT LPAR  &hml LGUI MINUS  &hml LSHFT RPAR  &kp PLUS                     &kp PRCNT  &hmr RSHFT LBRC  &hmr RGUI SEMI  &hmr LALT RBRC  &hmr RCTRL EXCL
+  &kp HASH         &kp STAR        &kp COLON        &kp FSLH         &kp AMPS                     &kp AT     &kp PIPE         &kp COMMA       &kp DOT         &kp QMARK
+                                                    &trans           &mo 5      &trans    &trans  &none      &trans
             >;
 
             display-name = "Symbols";
@@ -162,10 +178,10 @@
 
         sym_ru {
             bindings = <
-  &en TILDE                &en LT          &kp EQUAL         &en GT          &en GRAVE                    &en CARET  &en LBKT  &kp UNDER           &en RBKT    &en DLLR
-  &hml LCTRL RU_BACKSLASH  &hml LALT LPAR  &hml LSHFT MINUS  &hml LGUI RPAR  &kp PLUS                     &kp PRCNT  &en LBRC  &hmr RSHFT RU_SEMI  &en RBRC    &hmr RCTRL EXCL
-  &en HASH                 &kp STAR        &kp RU_COLON      &kp RU_FSLH     &en AMPS                     &en AT     &en PIPE  &kp RU_COMMA        &kp RU_DOT  &kp RU_QMARK
-                                                             &trans          &mo 5      &trans    &trans  &none      &trans
+  &en TILDE                &en LT          &kp EQUAL        &en GT           &en GRAVE                    &en CARET  &en LBKT  &kp UNDER          &en RBKT    &en DLLR
+  &hml LCTRL RU_BACKSLASH  &hml LALT LPAR  &hml LGUI MINUS  &hml LSHFT RPAR  &kp PLUS                     &kp PRCNT  &en LBRC  &hmr RGUI RU_SEMI  &en RBRC    &hmr RCTRL EXCL
+  &en HASH                 &kp STAR        &kp RU_COLON     &kp RU_FSLH      &en AMPS                     &en AT     &en PIPE  &kp RU_COMMA       &kp RU_DOT  &kp RU_QMARK
+                                                            &trans           &mo 5      &trans    &trans  &none      &trans
             >;
 
             display-name = "Symbols";
@@ -173,10 +189,10 @@
 
         nav {
             bindings = <
-  &kp N1          &kp N2    &kp N3     &kp N4    &kp N5                        &kp N6           &kp N7          &kp N8           &kp N9        &kp N0
-  &hml LCTRL ESC  &kp LALT  &kp LSHFT  &kp LGUI  &kp ENTER                     &kp PRINTSCREEN  &hmr RGUI LEFT  &hmr RSHFT DOWN  &hmr LALT UP  &hmr RCTRL RIGHT
-  &layer_en       &kp HOME  &kp INS    &kp END   &kp DELETE                    &kp CAPS         &none           &kp PG_DN        &kp PG_UP     &layer_ru
-                                       &trans    &none       &trans    &trans  &mo 5            &trans
+  &kp N1          &kp N2    &kp N3    &kp N4     &kp N5                        &kp N6           &kp N7           &kp N8          &kp N9        &kp N0
+  &hml LCTRL ESC  &kp LALT  &kp LGUI  &kp LSHFT  &kp ENTER                     &kp PRINTSCREEN  &hmr RSHFT LEFT  &hmr RGUI DOWN  &hmr LALT UP  &hmr RCTRL RIGHT
+  &layer_en       &kp HOME  &kp INS   &kp END    &kp DELETE                    &kp CAPS         &none            &kp PG_DN       &kp PG_UP     &layer_ru
+                                      &trans     &none       &trans    &trans  &mo 5            &trans
             >;
 
             display-name = "Nav";
@@ -184,10 +200,10 @@
 
         adj {
             bindings = <
-  &bootloader  &kp F1        &kp F2         &kp F3        &kp F4                     &bt BT_SEL 0  &bt BT_SEL 1        &bt BT_SEL 2       &bt BT_SEL 3        &bt BT_CLR
-  &kp LCTRL    &hml LALT F5  &hml LSHFT F6  &hml LGUI F7  &kp F8                     &out OUT_BLE  &hmr RGUI C_VOL_DN  &hmr RSHFT C_MUTE  &hmr LALT C_VOL_UP  &kp RCTRL
-  &to 6        &kp F9        &kp F10        &kp F11       &kp F12                    &out OUT_USB  &kp C_PREV          &kp C_PP           &kp C_NEXT          &studio_unlock
-                                            &trans        &trans   &trans    &trans  &trans        &trans
+  &bootloader  &kp F1        &kp F2        &kp F3         &kp F4                     &bt BT_SEL 0  &bt BT_SEL 1         &bt BT_SEL 2      &bt BT_SEL 3        &bt BT_CLR
+  &kp LCTRL    &hml LALT F5  &hml LGUI F6  &hml LSHFT F7  &kp F8                     &out OUT_BLE  &hmr RSHFT C_VOL_DN  &hmr RGUI C_MUTE  &hmr LALT C_VOL_UP  &kp RCTRL
+  &to 6        &kp F9        &kp F10       &kp F11        &kp F12                    &out OUT_USB  &kp C_PREV           &kp C_PP          &kp C_NEXT          &studio_unlock
+                                           &trans         &trans   &trans    &trans  &trans        &trans
             >;
 
             display-name = "Adjust";
@@ -195,10 +211,10 @@
 
         add_1 {
             bindings = <
-  &mt ESC TAB  &kp Q  &kp W  &kp E     &kp R                               &kp T  &none     &kp UP    &none   &kp ESC
-  &kp LSHFT    &kp A  &kp S  &kp D     &kp F                               &kp G  &kp LEFT  &kp DOWN  &kp UP  &none
-  &kp LCTRL    &kp Z  &kp X  &kp C     &kp V                               &kp B  &none     &none     &none   &to 0
-                             &kp LGUI  &lt 2 LALT  &kp SPACE    &kp ENTER  &mo 5  &none
+  &mt ESC TAB  &kp Q  &kp W  &kp E         &kp R                          &kp T  &none     &kp UP    &none            &kp ESC
+  &kp LSHFT    &kp A  &kp S  &kp D         &kp F                          &kp G  &kp LEFT  &kp DOWN  &kp RIGHT_ARROW  &none
+  &kp LCTRL    &kp Z  &kp X  &kp C         &kp V                          &kp B  &none     &none     &none            &to 0
+                             &kp LEFT_ALT  &mo 4  &kp SPACE    &kp ENTER  &mo 5  &kp RGUI
             >;
 
             label = "Gaming";
