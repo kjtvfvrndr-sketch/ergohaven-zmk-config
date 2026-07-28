@@ -1,0 +1,159 @@
+#include <dt-bindings/zmk/matrix_transform.h>
+#include <dt-bindings/pinctrl/nrf-pinctrl.h>
+#include <zephyr/dt-bindings/input/input-event-codes.h>
+#include "k04_micro_layout.dtsi"
+
+/ {
+    chosen {
+      zmk,kscan = &kscan0;
+      zmk,physical-layout = &physical_layout;
+      zmk,battery = &vbatt;
+    };
+
+    /*
+     * 38 позиций. КЛЮЧЕВОЕ РЕШЕНИЕ: позиции 0-35 идут в точности как у op36
+     * (0-9 верхний ряд, 10-19 средний, 20-29 нижний, 30-35 большие пальцы),
+     * а две кнопки модульных отсеков ДОПИСАНЫ В КОНЕЦ — позиции 36 и 37.
+     *
+     * Зачем так: если вставить их «на своё место» в середину нижнего ряда,
+     * все последующие индексы сдвинутся на 2, и hold-trigger-key-positions
+     * в op36_ruen.keymap (списки 0-35 для hml/hmr) станут указывать не туда —
+     * bilateral combinations у home row mods сломались бы МОЛЧА.
+     * При таком порядке op36-раскладки остаются валидными, надо лишь
+     * дописать 2 биндинга в конец каждого слоя.
+     *
+     * Порядок в map определяет только НУМЕРАЦИЮ позиций; физическое
+     * расположение задаётся координатами в k04_micro_layout.dtsi,
+     * где эти две клавиши тоже стоят последними, но с реальными x/y.
+     *
+     * RC(3,0) = кнопка ЛЕВОГО модуля, RC(3,6) = кнопка ПРАВОГО.
+     * Электрически это первая колонка ряда больших пальцев.
+     * Вращение энкодера идёт мимо матрицы — по P0.10/P0.09 (см. encoder_L1/R1).
+     */
+    default_transform: keymap_transform_0 {
+      compatible = "zmk,matrix-transform";
+      columns = <12>;
+      rows = <4>;
+      map = <
+RC(0,4) RC(0,3) RC(0,2) RC(0,1) RC(0,0)    RC(0,6) RC(0,7) RC(0,8) RC(0,9) RC(0,10)
+RC(1,4) RC(1,3) RC(1,2) RC(1,1) RC(1,0)    RC(1,6) RC(1,7) RC(1,8) RC(1,9) RC(1,10)
+RC(2,4) RC(2,3) RC(2,2) RC(2,1) RC(2,0)    RC(2,6) RC(2,7) RC(2,8) RC(2,9) RC(2,10)
+                RC(3,3) RC(3,2) RC(3,1)    RC(3,7) RC(3,8) RC(3,9)
+RC(3,0) RC(3,6)
+      >;
+    };
+
+    kscan0: kscan {
+      /* col2row — ПОДТВЕРЖДЕНО, не догадка. Два независимых доказательства:
+         1) в rmk-eh/keyboards/k04_micro/src/deep_sleep.rs колонки объявлены
+            как COL_OUTPUT_PINS (= выходы), ряды как ROW_WAKE_PINS (= входы);
+            в матрице RMK OUTPUT_PIN_NUM = COL ровно при COL2ROW = true;
+         2) у op36 то же соответствие пинов, и рабочий ZMK-шилд использует
+            col2row с PULL_DOWN на row-gpios. */
+      diode-direction = "col2row";
+      wakeup-source;
+    };
+
+    vbatt: vbatt {
+        status = "okay";
+        compatible = "zmk,battery-voltage-divider";
+        io-channels = <&adc 7>;
+        /* P0_31/AIN7. Значения резисторов — как на остальных платах
+           Ergohaven; RMK-коэффициент 782/1185 даёт ровно ту же долю. */
+        output-ohms = <1564000>;
+        full-ohms = <(806000 + 1564000)>;
+    };
+
+    /*
+     * Два энкодера — по одному на половину, ровно как encoder_L1/R1 в
+     * imperial44. Пины из [[split.*.input_device.encoder]] в keyboard.toml:
+     * pin_a = P0.10, pin_b = P0.09, internal_pullup = true (обе половины
+     * используют одни и те же пины — платы симметричны).
+     *
+     * steps=24 + triggers-per-rotation=12 дают 2 импульса на щелчок, что
+     * соответствует resolution = 2 в RMK-конфиге.
+     *
+     * P0.09/P0.10 — это NFC1/NFC2 у nRF52840. Отдельно освобождать их не
+     * надо: op36 и Velvet UI уже используют ровно эти два пина в матрице
+     * на этой же плате, то есть режим GPIO здесь заведомо рабочий.
+     *
+     * Оба по умолчанию disabled, включаются в overlay нужной половины.
+     */
+    encoder_L1: encoder_L1 {
+        compatible = "alps,ec11";
+        a-gpios = <&gpio0 10 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
+        b-gpios = <&gpio0  9 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
+        steps = <24>;
+        status = "disabled";
+    };
+
+    encoder_R1: encoder_R1 {
+        compatible = "alps,ec11";
+        a-gpios = <&gpio0 10 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
+        b-gpios = <&gpio0  9 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
+        steps = <24>;
+        status = "disabled";
+    };
+
+    sensors: sensors {
+        compatible = "zmk,keymap-sensors";
+        sensors = <&encoder_L1 &encoder_R1>;
+        triggers-per-rotation = <12>;
+    };
+
+    trackball_listener: trackball_listener {
+        compatible = "zmk,input-listener";
+        status = "disabled";
+    };
+};
+
+/*
+ * K04 Micro разводит трекбол на ДРУГИЕ пины, чем остальные платы Ergohaven:
+ *   sck  = P0_01   (у прочих — P0_08)
+ *   sdio = P0_00   (общий MOSI/MISO, у прочих — P0_17)
+ *   cs   = P0_05   (у прочих — P0_13)
+ *   irq  = P1_09   (у прочих — P0_15)
+ * Поэтому дефолтный pinctrl платы (boards/arm/ergohaven/ergohaven-pinctrl.dtsi)
+ * здесь переопределяется. Это безопасно: P0.00/P0.01 на nRF52840 — пины
+ * кварца XL1/XL2, НО плата ergohaven собрана с CONFIG_CLOCK_CONTROL_NRF_K32SRC_RC
+ * (внутренний RC-генератор), внешнего 32 кГц кварца нет — пины свободны.
+ */
+&spi0_default {
+    group1 {
+        psels = <NRF_PSEL(SPIM_SCK, 0, 1)>,
+                <NRF_PSEL(SPIM_MOSI, 0, 0)>,
+                <NRF_PSEL(SPIM_MISO, 0, 0)>;
+    };
+};
+
+&spi0_sleep {
+    group1 {
+        psels = <NRF_PSEL(SPIM_SCK, 0, 1)>,
+                <NRF_PSEL(SPIM_MOSI, 0, 0)>,
+                <NRF_PSEL(SPIM_MISO, 0, 0)>;
+        low-power-enable;
+    };
+};
+
+&spi0 {
+    status = "disabled";
+    cs-gpios = <&gpio0 5 GPIO_ACTIVE_LOW>;
+
+    trackball: trackball@0 {
+        status = "disabled";
+        compatible = "pixart,pmw3610";
+        reg = <0>;
+        spi-max-frequency = <2000000>;
+        irq-gpios = <&gpio1 9 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+        cpi = <1000>;
+        evt-type = <INPUT_EV_REL>;
+        x-input-code = <INPUT_REL_X>;
+        y-input-code = <INPUT_REL_Y>;
+
+        /* Держит сенсор бодрым, пока ZMK в состоянии ACTIVE — убирает
+           задержку "первого движения" после паузы. Ровно то, ради чего
+           трекбол делается на central. Цена — расход батареи; если
+           не нужно, просто удалите строку. */
+        force-awake;
+    };
+};
