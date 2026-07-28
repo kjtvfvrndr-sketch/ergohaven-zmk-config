@@ -1,5 +1,0 @@
-config SHIELD_K04_MICRO_LEFT
-    def_bool $(shields_list_contains,k04_micro_left)
-
-config SHIELD_K04_MICRO_RIGHT
-    def_bool $(shields_list_contains,k04_micro_right)
