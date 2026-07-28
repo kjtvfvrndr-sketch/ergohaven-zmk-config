@@ -153,3 +153,12 @@ include:
 
   - board: ergohaven
     shield: settings_reset
+
+  - board: ergohaven
+    shield: k04_micro_left
+  - board: ergohaven
+    shield: k04_micro_right
+    keymap: k04_micro
+    snippet: studio-rpc-usb-uart
+    cmake-args: -DCONFIG_ZMK_STUDIO=y
+    artifact-name: k04_micro_right-ergohaven-zmk
