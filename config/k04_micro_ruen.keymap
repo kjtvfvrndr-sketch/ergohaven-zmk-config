@@ -26,6 +26,18 @@
 #include <zephyr/dt-bindings/input/input-event-codes.h>
 #include <dt-bindings/zmk/pointing.h>
 
+/ {
+    input_processors {
+        xy_fine: xy_fine {
+            compatible = "zmk,input-processor-scaler";
+            #input-processor-cells = <2>;
+            type = <INPUT_EV_REL>;
+            codes = <INPUT_REL_X INPUT_REL_Y>;
+            track-remainders;
+        };
+    };
+};
+
 &mt {
     quick-tap-ms = <200>;
     flavor = "tap-preferred";
@@ -42,7 +54,7 @@
             compatible = "zmk,input-processor-temp-layer";
             #input-processor-cells = <2>;
             require-prior-idle-ms = <800>;
-            excluded-positions = <>;
+            excluded-positions = <10 11 12 13 14 15 16 17 18 19>;
         };
         hml: home_row_mod_left {
             compatible = "zmk,behavior-hold-tap";
@@ -313,26 +325,23 @@
     };
 };
 
-/*
- * Обвязка трекбола — перенесена из velvet_v3_ui_ruen.
- * У нас правая половина central, трекбол подключён к ней напрямую,
- * поэтому zmk,input-split не нужен: хватает обычного листенера.
- *
- * Индексы слоёв пересчитаны под этот кеймап (у velvet были 6/7/8).
- */
 &trackball_listener {
-    input-processors = <&zip_auto_mouse 8 500>, <&zip_xy_scaler 9 20>;
+    input-processors = <&zip_auto_mouse 8 1000>, <&zip_xy_scaler 5 16>;
 
     scroller {
         layers = <9>;
         input-processors =
             <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,
-            <&zip_xy_scaler 1 32>,
+            <&xy_fine 5 1024>,
             <&zip_xy_to_scroll_mapper>;
     };
 
     sniper {
         layers = <10>;
-        input-processors = <&zip_xy_scaler 1 4>;
+        input-processors = <&xy_fine 5 64>;
     };
+};
+
+&mkp_input_listener {
+    input-processors = <&zip_auto_mouse 8 1000>;
 };
