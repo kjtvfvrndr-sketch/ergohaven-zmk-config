@@ -37,16 +37,6 @@
         };
     };
 
-    &pointer_accel {
-        input-type = <INPUT_EV_REL>;
-        track-remainders;
-        min-factor = <1000>;
-        max-factor = <2200>;
-        speed-threshold = <3200>;
-        speed-max = <12800>;
-        acceleration-exponent = <2>;
-    };
-
     accel_scroll: accel_scroll {
         compatible = "zmk,input-processor-acceleration";
         status = "okay";
@@ -60,6 +50,16 @@
         acceleration-exponent = <2>;
     };
 };
+
+&pointer_accel {
+        input-type = <INPUT_EV_REL>;
+        track-remainders;
+        min-factor = <1000>;
+        max-factor = <2200>;
+        speed-threshold = <3200>;
+        speed-max = <12800>;
+        acceleration-exponent = <2>;
+    };
 
 &mt {
     quick-tap-ms = <200>;
