@@ -16,7 +16,6 @@
  * Слой Mouse включается сам при движении трекбола (zip_auto_mouse).
  */
 #include "keys_ru.h"
-#include "keys_ru.h"
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
@@ -25,6 +24,7 @@
 #include <input/processors.dtsi>
 #include <zephyr/dt-bindings/input/input-event-codes.h>
 #include <dt-bindings/zmk/pointing.h>
+#include <behaviors/input_gestures_accel.dtsi>
 
 / {
     input_processors {
@@ -35,6 +35,29 @@
             codes = <INPUT_REL_X INPUT_REL_Y>;
             track-remainders;
         };
+    };
+
+    &pointer_accel {
+        input-type = <INPUT_EV_REL>;
+        track-remainders;
+        min-factor = <1000>;
+        max-factor = <2200>;
+        speed-threshold = <3200>;
+        speed-max = <12800>;
+        acceleration-exponent = <2>;
+    };
+
+    accel_scroll: accel_scroll {
+        compatible = "zmk,input-processor-acceleration";
+        status = "okay";
+        #input-processor-cells = <0>;
+        input-type = <INPUT_EV_REL>;
+        track-remainders;
+        min-factor = <1000>;
+        max-factor = <3000>;
+        speed-threshold = <2000>;
+        speed-max = <9600>;
+        acceleration-exponent = <2>;
     };
 };
 
@@ -47,15 +70,13 @@
 / {
     behaviors {
 
-        /* Из velvet_v3_ui_ruen: временный слой мыши, включается самим
-           движением трекбола. require-prior-idle-ms не даёт слою
-           выскочить, если вы только что печатали. */
         zip_auto_mouse: zip_auto_mouse {
             compatible = "zmk,input-processor-temp-layer";
             #input-processor-cells = <2>;
             require-prior-idle-ms = <800>;
-            excluded-positions = <10 11 12 13 14 15 16 17 18 19>;
+            excluded-positions = <10 11 12 13 14>;
         };
+       
         hml: home_row_mod_left {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -326,12 +347,13 @@
 };
 
 &trackball_listener {
-    input-processors = <&zip_auto_mouse 8 1000>, <&zip_xy_scaler 5 16>;
+    input-processors = <&zip_auto_mouse 8 1000>, <&pointer_accel>, <&xy_fine 9 64>;
 
     scroller {
         layers = <9>;
         input-processors =
             <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,
+            <&accel_scroll>,
             <&xy_fine 5 1024>,
             <&zip_xy_to_scroll_mapper>;
     };
