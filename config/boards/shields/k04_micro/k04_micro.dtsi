@@ -145,7 +145,7 @@ RC(3,0) RC(3,6)
         reg = <0>;
         spi-max-frequency = <2000000>;
         irq-gpios = <&gpio1 9 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
-        cpi = <3200>;
+        cpi = <1000>;
         swap-xy;
         evt-type = <INPUT_EV_REL>;
         x-input-code = <INPUT_REL_X>;

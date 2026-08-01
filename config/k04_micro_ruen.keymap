@@ -45,21 +45,21 @@
         track-remainders;
         min-factor = <1000>;
         max-factor = <3000>;
-        speed-threshold = <2000>;
-        speed-max = <9600>;
+        speed-threshold = <625>;
+        speed-max = <3000>;
         acceleration-exponent = <2>;
     };
 };
 
 &pointer_accel {
-        input-type = <INPUT_EV_REL>;
-        track-remainders;
-        min-factor = <1000>;
-        max-factor = <2200>;
-        speed-threshold = <3200>;
-        speed-max = <12800>;
-        acceleration-exponent = <2>;
-    };
+    input-type = <INPUT_EV_REL>;
+    track-remainders;
+    min-factor = <500>;
+    max-factor = <3000>;
+    speed-threshold = <1000>;
+    speed-max = <8000>;
+    acceleration-exponent = <1>;
+};
 
 &mt {
     quick-tap-ms = <200>;
@@ -347,20 +347,20 @@
 };
 
 &trackball_listener {
-    input-processors = <&zip_auto_mouse 8 1000>, <&pointer_accel>, <&xy_fine 9 64>;
+    input-processors = <&zip_auto_mouse 8 1000>, <&pointer_accel>;
 
     scroller {
         layers = <9>;
         input-processors =
             <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,
             <&accel_scroll>,
-            <&xy_fine 5 1024>,
+            <&xy_fine 1 64>,
             <&zip_xy_to_scroll_mapper>;
     };
 
     sniper {
         layers = <10>;
-        input-processors = <&xy_fine 5 64>;
+        input-processors = <&xy_fine 1 4>;
     };
 };
 
