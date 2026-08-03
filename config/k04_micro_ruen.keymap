@@ -57,8 +57,8 @@
     min-factor = <1000>;
     max-factor = <7500>;
     speed-threshold = <100>;
-    speed-max = <16000>;
-    acceleration-exponent = <2>;
+    speed-max = <10000>;
+    acceleration-exponent = <4>;
 };
 
 &mt {
