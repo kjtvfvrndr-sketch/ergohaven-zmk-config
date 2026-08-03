@@ -56,9 +56,9 @@
     track-remainders;
     min-factor = <1000>;
     max-factor = <7500>;
-    speed-threshold = <2000>;
-    speed-max = <8000>;
-    acceleration-exponent = <1>;
+    speed-threshold = <500>;
+    speed-max = <12000>;
+    acceleration-exponent = <3>;
 };
 
 &mt {
