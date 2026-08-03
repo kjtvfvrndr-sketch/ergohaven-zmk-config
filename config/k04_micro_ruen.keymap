@@ -55,9 +55,9 @@
     input-type = <INPUT_EV_REL>;
     track-remainders;
     min-factor = <1000>;
-    max-factor = <7500>;
-    speed-threshold = <500>;
-    speed-max = <20000>;
+    max-factor = <6000>;
+    speed-threshold = <100>;
+    speed-max = <16000>;
     acceleration-exponent = <2>;
 };
 
