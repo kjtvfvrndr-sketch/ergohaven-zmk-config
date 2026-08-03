@@ -44,9 +44,9 @@
         input-type = <INPUT_EV_REL>;
         track-remainders;
         min-factor = <1000>;
-        max-factor = <5000>;
+        max-factor = <6000>;
         speed-threshold = <1000>;
-        speed-max = <8000>;
+        speed-max = <12000>;
         acceleration-exponent = <3>;
     };
 };
@@ -55,8 +55,8 @@
     input-type = <INPUT_EV_REL>;
     track-remainders;
     min-factor = <1000>;
-    max-factor = <7500>;
-    speed-threshold = <500>;
+    max-factor = <10000>;
+    speed-threshold = <100>;
     speed-max = <12000>;
     acceleration-exponent = <3>;
 };
@@ -347,7 +347,7 @@
 };
 
 &trackball_listener {
-    input-processors = <&zip_auto_mouse 8 1000>, <&pointer_accel>, <&xy_fine 2 5>;
+    input-processors = <&zip_auto_mouse 8 1000>, <&pointer_accel>, <&xy_fine 3 10>;
 
     scroller {
         layers = <9>;
