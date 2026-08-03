@@ -37,6 +37,19 @@
         };
     };
 
+    accel_lo: accel_lo {
+        compatible = "zmk,input-processor-acceleration";
+        status = "okay";
+        #input-processor-cells = <0>;
+        input-type = <INPUT_EV_REL>;
+        track-remainders;
+        min-factor = <1000>;
+        max-factor = <2500>;
+        speed-threshold = <600>;
+        speed-max = <1000>;
+        acceleration-exponent = <1>;
+    };
+
     accel_scroll: accel_scroll {
         compatible = "zmk,input-processor-acceleration";
         status = "okay";
@@ -55,10 +68,10 @@
     input-type = <INPUT_EV_REL>;
     track-remainders;
     min-factor = <1000>;
-    max-factor = <7500>;
-    speed-threshold = <600>;
-    speed-max = <8000>;
-    acceleration-exponent = <2>;
+    max-factor = <3000>;
+    speed-threshold = <2500>;
+    speed-max = <20000>;
+    acceleration-exponent = <3>;
 };
 
 &mt {
@@ -347,7 +360,7 @@
 };
 
 &trackball_listener {
-    input-processors = <&zip_auto_mouse 8 1000>, <&pointer_accel>, <&xy_fine 2 5>;
+    input-processors = <&zip_auto_mouse 8 1000>, <&accel_lo>, <&pointer_accel>, <&xy_fine 2 5>;
 
     scroller {
         layers = <9>;
