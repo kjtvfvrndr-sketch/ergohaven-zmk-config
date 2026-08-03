@@ -44,7 +44,7 @@
         input-type = <INPUT_EV_REL>;
         track-remainders;
         min-factor = <1000>;
-        max-factor = <6000>;
+        max-factor = <8000>;
         speed-threshold = <1000>;
         speed-max = <12000>;
         acceleration-exponent = <3>;
@@ -55,10 +55,10 @@
     input-type = <INPUT_EV_REL>;
     track-remainders;
     min-factor = <1000>;
-    max-factor = <10000>;
+    max-factor = <6000>;
     speed-threshold = <100>;
-    speed-max = <12000>;
-    acceleration-exponent = <3>;
+    speed-max = <16000>;
+    acceleration-exponent = <2>;
 };
 
 &mt {
@@ -130,7 +130,7 @@
 
         ru_io {
             bindings = <&kp RU_CYRILLIC_IO>;
-            key-positions = <3 4>;
+            key-positioans = <3 4>;
             layers = <1>;
         };
 
@@ -347,14 +347,14 @@
 };
 
 &trackball_listener {
-    input-processors = <&zip_auto_mouse 8 1000>, <&pointer_accel>, <&xy_fine 3 10>;
+    input-processors = <&zip_auto_mouse 8 1000>, <&pointer_accel>, <&xy_fine 1 2>;
 
     scroller {
         layers = <9>;
         input-processors =
             <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,
             <&accel_scroll>,
-            <&xy_fine 1 64>,
+            <&xy_fine 1 100>,
             <&zip_xy_to_scroll_mapper>;
     };
 
