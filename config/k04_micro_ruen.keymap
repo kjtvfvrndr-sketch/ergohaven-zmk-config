@@ -55,10 +55,10 @@
     input-type = <INPUT_EV_REL>;
     track-remainders;
     min-factor = <1000>;
-    max-factor = <6000>;
+    max-factor = <7500>;
     speed-threshold = <100>;
-    speed-max = <16000>;
-    acceleration-exponent = <2>;
+    speed-max = <12000>;
+    acceleration-exponent = <3>;
 };
 
 &mt {
@@ -347,7 +347,7 @@
 };
 
 &trackball_listener {
-    input-processors = <&zip_auto_mouse 8 1000>, <&pointer_accel>, <&xy_fine 1 2>;
+    input-processors = <&zip_auto_mouse 8 1000>, <&pointer_accel>, <&xy_fine 2 5>;
 
     scroller {
         layers = <9>;
