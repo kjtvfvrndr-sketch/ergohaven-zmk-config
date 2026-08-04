@@ -98,7 +98,7 @@ RC(3,0) RC(3,6)
     sensors: sensors {
         compatible = "zmk,keymap-sensors";
         sensors = <&encoder_L1 &encoder_R1>;
-        triggers-per-rotation = <12>;
+        triggers-per-rotation = <6>;
     };
 
     trackball_listener: trackball_listener {
@@ -150,5 +150,13 @@ RC(3,0) RC(3,6)
         evt-type = <INPUT_EV_REL>;
         x-input-code = <INPUT_REL_X>;
         y-input-code = <INPUT_REL_Y>;
+    };
+};
+
+/* Узел leds платы ergohaven сидит на P1.10 — у K:04 Micro это row-gpio.
+   Драйвер led_gpio по умолчанию не собирается, но узел лучше погасить явно. */
+/ {
+    leds {
+        status = "disabled";
     };
 };
