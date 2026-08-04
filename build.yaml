@@ -167,7 +167,11 @@ include:
     cmake-args: -DCONFIG_ZMK_STUDIO=y
     artifact-name: k04_micro_right_ruen-ergohaven-zmk
 
+# Временная отладочная сборка: лог инициализации PMW3610 по USB CDC ACM.
+# НЕ использовать для ночного теста разряда — при подключённом USB
+# is_usb_power_present() блокирует deep sleep (zmk/app/src/activity.c).
   - board: ergohaven
     shield: k04_micro_right
-    cmake-args: -DCONFIG_ZMK_USB_LOGGING=y -DCONFIG_PMW3610_ALT_LOG_LEVEL_INF=y
+    snippet: zmk-usb-logging
+    cmake-args: -DCONFIG_PMW3610_ALT_LOG_LEVEL_INF=y
     artifact-name: k04_micro_right_debug
