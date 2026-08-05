@@ -55,9 +55,9 @@
     input-type = <INPUT_EV_REL>;
     track-remainders;
     min-factor = <1000>;
-    max-factor = <7500>;
+    max-factor = <6000>;
     speed-threshold = <100>;
-    speed-max = <20000>;
+    speed-max = <16000>;
     acceleration-exponent = <2>;
 };
 
@@ -74,7 +74,7 @@
             compatible = "zmk,input-processor-temp-layer-keep";
             #input-processor-cells = <2>;
             require-prior-idle-ms = <300>;
-            excluded-positions = <255>;
+            excluded-positions = <10 11 12 13 14>;
             keep-active-while-layers = <9 10>;
         };
        
@@ -348,7 +348,7 @@
 };
 
 &trackball_listener {
-    input-processors = <&zip_auto_mouse 8 500>, <&pointer_accel>, <&xy_fine 3 10>;
+    input-processors = <&zip_auto_mouse 8 500>, <&pointer_accel>, <&xy_fine 2 5>;
 
     scroller {
         layers = <9>;
