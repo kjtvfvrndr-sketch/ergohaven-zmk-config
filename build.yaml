@@ -52,18 +52,18 @@ include:
 #  - board: ergohaven
 #    shield: velvet_v3_ui_right_qube
 
-  - board: ergohaven
-    shield: op36_left
-    snippet: studio-rpc-usb-uart
-    cmake-args: -DCONFIG_ZMK_STUDIO=y
-  - board: ergohaven
-    shield: op36_left
-    keymap: op36_ruen
-    snippet: studio-rpc-usb-uart
-    cmake-args: -DCONFIG_ZMK_STUDIO=y
-    artifact-name: op36_left_ruen-ergohaven-zmk
-  - board: ergohaven
-    shield: op36_right
+  # - board: ergohaven
+  #   shield: op36_left
+  #   snippet: studio-rpc-usb-uart
+  #   cmake-args: -DCONFIG_ZMK_STUDIO=y
+  # - board: ergohaven
+  #   shield: op36_left
+  #   keymap: op36_ruen
+  #   snippet: studio-rpc-usb-uart
+  #   cmake-args: -DCONFIG_ZMK_STUDIO=y
+  #   artifact-name: op36_left_ruen-ergohaven-zmk
+  # - board: ergohaven
+  #   shield: op36_right
 # - board: ergohaven
 #   shield: op36_qube qube dongle_screen
 #   snippet: studio-rpc-usb-uart
@@ -156,10 +156,10 @@ include:
 
   - board: ergohaven
     shield: k04_micro_left
-  - board: ergohaven
-    shield: k04_micro_right
-    snippet: studio-rpc-usb-uart
-    cmake-args: -DCONFIG_ZMK_STUDIO=y
+  # - board: ergohaven
+  #   shield: k04_micro_right
+  #   snippet: studio-rpc-usb-uart
+  #   cmake-args: -DCONFIG_ZMK_STUDIO=y
   - board: ergohaven
     shield: k04_micro_right
     keymap: k04_micro_ruen
@@ -167,11 +167,24 @@ include:
     cmake-args: -DCONFIG_ZMK_STUDIO=y
     artifact-name: k04_micro_right_ruen-ergohaven-zmk
 
-# Временная отладочная сборка: лог инициализации PMW3610 по USB CDC ACM.
-# НЕ использовать для ночного теста разряда — при подключённом USB
-# is_usb_power_present() блокирует deep sleep (zmk/app/src/activity.c).
+# # Временная отладочная сборка: лог инициализации PMW3610 по USB CDC ACM.
+# # НЕ использовать для ночного теста разряда — при подключённом USB
+# # is_usb_power_present() блокирует deep sleep (zmk/app/src/activity.c).
+#   - board: ergohaven
+#     shield: k04_micro_right
+#     snippet: zmk-usb-logging
+#     cmake-args: -DCONFIG_PMW3610_ALT_LOG_LEVEL_INF=y
+#     artifact-name: k04_micro_right_debug
+
+# ── Диагностика батареи. Временное, удалить после замера. ──
   - board: ergohaven
     shield: k04_micro_right
     snippet: zmk-usb-logging
-    cmake-args: -DCONFIG_PMW3610_ALT_LOG_LEVEL_INF=y
-    artifact-name: k04_micro_right_debug
+    cmake-args: -DCONFIG_LOG_MAX_LEVEL=4 -DCONFIG_ZMK_BATTERY_REPORT_INTERVAL=30
+    artifact-name: k04_micro_right_batt_vdiv
+
+  - board: ergohaven
+    shield: k04_micro_right vddh_probe
+    snippet: zmk-usb-logging
+    cmake-args: -DCONFIG_LOG_MAX_LEVEL=4 -DCONFIG_ZMK_BATTERY_REPORT_INTERVAL=30
+    artifact-name: k04_micro_right_batt_vddh
