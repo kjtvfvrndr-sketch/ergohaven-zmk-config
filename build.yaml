@@ -176,15 +176,15 @@ include:
 #     cmake-args: -DCONFIG_PMW3610_ALT_LOG_LEVEL_INF=y
 #     artifact-name: k04_micro_right_debug
 
-# ── Диагностика батареи. Временное, удалить после замера. ──
-  - board: ergohaven
-    shield: k04_micro_right
-    snippet: zmk-usb-logging
-    cmake-args: -DCONFIG_LOG_MAX_LEVEL=4 -DCONFIG_ZMK_BATTERY_REPORT_INTERVAL=30
-    artifact-name: k04_micro_right_batt_vdiv
+# # ── Диагностика батареи. Временное, удалить после замера. ──
+#   - board: ergohaven
+#     shield: k04_micro_right
+#     snippet: zmk-usb-logging
+#     cmake-args: -DCONFIG_LOG_MAX_LEVEL=4 -DCONFIG_ZMK_BATTERY_REPORT_INTERVAL=30
+#     artifact-name: k04_micro_right_batt_vdiv
 
-  - board: ergohaven
-    shield: k04_micro_right vddh_probe
-    snippet: zmk-usb-logging
-    cmake-args: -DCONFIG_LOG_MAX_LEVEL=4 -DCONFIG_ZMK_BATTERY_REPORT_INTERVAL=30
-    artifact-name: k04_micro_right_batt_vddh
+#   - board: ergohaven
+#     shield: k04_micro_right vddh_probe
+#     snippet: zmk-usb-logging
+#     cmake-args: -DCONFIG_LOG_MAX_LEVEL=4 -DCONFIG_ZMK_BATTERY_REPORT_INTERVAL=30
+#     artifact-name: k04_micro_right_batt_vddh

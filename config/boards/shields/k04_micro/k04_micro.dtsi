@@ -58,10 +58,8 @@ RC(3,0) RC(3,6)
         status = "okay";
         compatible = "zmk,battery-voltage-divider";
         io-channels = <&adc 7>;
-        /* P0_31/AIN7. Значения резисторов — как на остальных платах
-           Ergohaven; RMK-коэффициент 782/1185 даёт ровно ту же долю. */
         output-ohms = <1564000>;
-        full-ohms = <(806000 + 1564000)>;
+        full-ohms = <(636000 + 1564000)>;
     };
 
     /*
