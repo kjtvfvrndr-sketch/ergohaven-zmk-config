@@ -13,7 +13,7 @@ manifest:
       import: config/west.yml
     - name: zmk-pmw3610-driver
       remote: kjtvfvrndr-sketch
-      revision: main
+      revision: diag-shutdown
     - name: zmk-pointing-acceleration
       remote: oleksandrmaslov
       revision: main
