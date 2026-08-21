@@ -1,16 +1,5 @@
 /*
  * K:04 Micro — RU/EN вариант (аналог op36_ruen.keymap)
- *
- * Состав:
- *   - позиции 0-35 и все слои: 1:1 из config/op36_ruen.keymap
- *   - слои Mouse/Scroll/Sniper и обвязка трекбола: из
- *     config/velvet_v3_ui_ruen.keymap, расстановка перенесена
- *     с 6 колонок velvet на 5 колонок K:04
- *
- * Слои: en=0, ru=1, sym_en=2, sym_ru=3, nav=4, adj=5, add_1=6, add_2=7, mouse=8, scroll=9, sniper=10
- *
- * Ряд указателя (mouse): мизинец=Scroll, безым.=ПКМ, средний=СКМ,
- * указат.=ЛКМ, внутр.=Sniper — зеркально на обеих половинах.
  * Слой Mouse включается сам при движении трекбола (zip_auto_mouse).
  */
 
@@ -73,7 +62,7 @@
             #input-processor-cells = <2>;
             require-prior-idle-ms = <300>;
             excluded-positions = <10 11 12 13 14>;
-            keep-active-while-layers = <9 10>;
+            keep-active-while-layers = <8>;
         };
 
         hml: home_row_mod_left {
@@ -314,17 +303,12 @@
         <&xy_fine 2 5>;
 
     scroller {
-        layers = <9>;
+        layers = <8>;
         input-processors =
             <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,
             <&accel_scroll>,
             <&xy_fine 1 100>,
             <&zip_xy_to_scroll_mapper>;
-    };
-
-    sniper {
-        layers = <10>;
-        input-processors = <&xy_fine 1 4>;
     };
 };
 
