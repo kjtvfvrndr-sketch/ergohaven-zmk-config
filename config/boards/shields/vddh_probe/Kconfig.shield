@@ -1,2 +1,0 @@
-config SHIELD_VDDH_PROBE
-    def_bool $(shields_list_contains,vddh_probe)

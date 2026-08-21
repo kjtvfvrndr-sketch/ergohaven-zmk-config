@@ -156,10 +156,6 @@ include:
 
   - board: ergohaven
     shield: k04_micro_left
-  # - board: ergohaven
-  #   shield: k04_micro_right
-  #   snippet: studio-rpc-usb-uart
-  #   cmake-args: -DCONFIG_ZMK_STUDIO=y
   - board: ergohaven
     shield: k04_micro_right
     keymap: k04_micro_ruen
