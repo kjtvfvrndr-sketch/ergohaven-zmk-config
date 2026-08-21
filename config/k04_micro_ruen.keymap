@@ -13,16 +13,17 @@
  * указат.=ЛКМ, внутр.=Sniper — зеркально на обеих половинах.
  * Слой Mouse включается сам при движении трекбола (zip_auto_mouse).
  */
+
 #include "keys_ru.h"
+#include <dt-bindings/zmk/input_transform.h>
+#include <input/processors.dtsi>
+#include <zephyr/dt-bindings/input/input-event-codes.h>
+#include <behaviors/input_gestures_accel.dtsi>
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/outputs.h>
-#include <dt-bindings/zmk/input_transform.h>
-#include <input/processors.dtsi>
-#include <zephyr/dt-bindings/input/input-event-codes.h>
 #include <dt-bindings/zmk/pointing.h>
-#include <behaviors/input_gestures_accel.dtsi>
 
 / {
     input_processors {
@@ -67,7 +68,6 @@
 
 / {
     behaviors {
-
         zip_auto_mouse: zip_auto_mouse {
             compatible = "zmk,input-processor-temp-layer-keep";
             #input-processor-cells = <2>;
@@ -75,7 +75,7 @@
             excluded-positions = <10 11 12 13 14>;
             keep-active-while-layers = <9 10>;
         };
-       
+
         hml: home_row_mod_left {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -208,10 +208,10 @@
 
         en {
             bindings = <
-  &kp Q         &kp W        &kp E        &kp R          &kp T                          &kp Y  &kp U         &kp I        &kp O        &kp P
-  &hml LCTRL A  &hml LALT S  &hml LGUI D  &hml LSHFT F   &kp G                          &kp H  &hmr RSHFT J  &hmr RGUI K  &hmr LALT L  &hmr RCTRL SEMICOLON
-  &kp Z         &kp X        &kp C        &kp V          &kp B                          &kp N  &kp M         &kp COMMA    &kp DOT      &kp SQT
-                                          &kp BACKSPACE  &mo 4  &lg_space    &kp ENTER  &mo 2  &kp TAB
+&kp Q         &kp W        &kp E        &kp R          &kp T                          &kp Y  &kp U         &kp I        &kp O        &kp P
+&hml LCTRL A  &hml LALT S  &hml LGUI D  &hml LSHFT F   &kp G                          &kp H  &hmr RSHFT J  &hmr RGUI K  &hmr LALT L  &hmr RCTRL SEMICOLON
+&kp Z         &kp X        &kp C        &kp V          &kp B                          &kp N  &kp M         &kp COMMA    &kp DOT      &kp SQT
+                                        &kp BACKSPACE  &mo 4  &lg_space    &kp ENTER  &mo 2  &kp TAB
             >;
 
             display-name = "Base";
@@ -219,10 +219,10 @@
 
         ru {
             bindings = <
-  &kp RU_CYRILLIC_SHORT_I    &kp RU_CYRILLIC_TSE         &kp RU_CYRILLIC_U         &kp RU_CYRILLIC_KA        &kp RU_CYRILLIC_IE                          &kp RU_CYRILLIC_EN  &kp RU_CYRILLIC_GHE        &kp RU_CYRILLIC_SHA       &kp RU_CYRILLIC_SHCHA     &kp RU_CYRILLIC_ZE
-  &hml LCTRL RU_CYRILLIC_EF  &hml LALT RU_CYRILLIC_YERU  &hml LGUI RU_CYRILLIC_VE  &hml LSHFT RU_CYRILLIC_A  &kp RU_CYRILLIC_PE                          &kp RU_CYRILLIC_ER  &hmr RSHFT RU_CYRILLIC_O   &hmr RGUI RU_CYRILLIC_EL  &hmr LALT RU_CYRILLIC_DE  &hmr RCTRL RU_CYRILLIC_ZHE
-  &kp RU_CYRILLIC_YA         &kp RU_CYRILLIC_CHE         &kp RU_CYRILLIC_ES        &kp RU_CYRILLIC_EM        &kp RU_CYRILLIC_I                           &kp RU_CYRILLIC_TE  &kp RU_CYRILLIC_SOFT_SIGN  &kp RU_CYRILLIC_BE        &kp RU_CYRILLIC_YU        &kp RU_CYRILLIC_E
-                                                                                   &kp BACKSPACE             &mo 4               &lg_space    &kp ENTER  &mo 3               &kp TAB
+&kp RU_CYRILLIC_SHORT_I    &kp RU_CYRILLIC_TSE         &kp RU_CYRILLIC_U         &kp RU_CYRILLIC_KA        &kp RU_CYRILLIC_IE                          &kp RU_CYRILLIC_EN  &kp RU_CYRILLIC_GHE        &kp RU_CYRILLIC_SHA       &kp RU_CYRILLIC_SHCHA     &kp RU_CYRILLIC_ZE
+&hml LCTRL RU_CYRILLIC_EF  &hml LALT RU_CYRILLIC_YERU  &hml LGUI RU_CYRILLIC_VE  &hml LSHFT RU_CYRILLIC_A  &kp RU_CYRILLIC_PE                          &kp RU_CYRILLIC_ER  &hmr RSHFT RU_CYRILLIC_O   &hmr RGUI RU_CYRILLIC_EL  &hmr LALT RU_CYRILLIC_DE  &hmr RCTRL RU_CYRILLIC_ZHE
+&kp RU_CYRILLIC_YA         &kp RU_CYRILLIC_CHE         &kp RU_CYRILLIC_ES        &kp RU_CYRILLIC_EM        &kp RU_CYRILLIC_I                           &kp RU_CYRILLIC_TE  &kp RU_CYRILLIC_SOFT_SIGN  &kp RU_CYRILLIC_BE        &kp RU_CYRILLIC_YU        &kp RU_CYRILLIC_E
+                                                                                 &kp BACKSPACE             &mo 4               &lg_space    &kp ENTER  &mo 3               &kp TAB
             >;
 
             display-name = "Ru";
@@ -230,10 +230,10 @@
 
         sym_en {
             bindings = <
-  &kp TILDE        &kp LT          &kp EQUAL        &kp GT           &kp GRAVE                    &kp CARET  &kp LBKT         &kp UNDER       &kp RBKT        &kp DLLR
-  &hml LCTRL BSLH  &hml LALT LPAR  &hml LGUI MINUS  &hml LSHFT RPAR  &kp PLUS                     &kp PRCNT  &hmr RSHFT LBRC  &hmr RGUI SEMI  &hmr LALT RBRC  &hmr RCTRL EXCL
-  &kp HASH         &kp STAR        &kp COLON        &kp FSLH         &kp AMPS                     &kp AT     &kp PIPE         &kp COMMA       &kp DOT         &kp QMARK
-                                                    &trans           &mo 5      &trans    &trans  &none      &trans
+&kp TILDE        &kp LT          &kp EQUAL        &kp GT           &kp GRAVE                    &kp CARET  &kp LBKT         &kp UNDER       &kp RBKT        &kp DLLR
+&hml LCTRL BSLH  &hml LALT LPAR  &hml LGUI MINUS  &hml LSHFT RPAR  &kp PLUS                     &kp PRCNT  &hmr RSHFT LBRC  &hmr RGUI SEMI  &hmr LALT RBRC  &hmr RCTRL EXCL
+&kp HASH         &kp STAR        &kp COLON        &kp FSLH         &kp AMPS                     &kp AT     &kp PIPE         &kp COMMA       &kp DOT         &kp QMARK
+                                                  &trans           &mo 5      &trans    &trans  &none      &trans
             >;
 
             display-name = "Symbols";
@@ -241,10 +241,10 @@
 
         sym_ru {
             bindings = <
-  &en TILDE                &en LT          &kp EQUAL        &en GT           &en GRAVE                    &en CARET  &en LBKT  &kp UNDER          &en RBKT    &en DLLR
-  &hml LCTRL RU_BACKSLASH  &hml LALT LPAR  &hml LGUI MINUS  &hml LSHFT RPAR  &kp PLUS                     &kp PRCNT  &en LBRC  &hmr RGUI RU_SEMI  &en RBRC    &hmr RCTRL EXCL
-  &en HASH                 &kp STAR        &kp RU_COLON     &kp RU_FSLH      &en AMPS                     &en AT     &en PIPE  &kp RU_COMMA       &kp RU_DOT  &kp RU_QMARK
-                                                            &trans           &mo 5      &trans    &trans  &none      &trans
+&en TILDE                &en LT          &kp EQUAL        &en GT           &en GRAVE                    &en CARET  &en LBKT  &kp UNDER          &en RBKT    &en DLLR
+&hml LCTRL RU_BACKSLASH  &hml LALT LPAR  &hml LGUI MINUS  &hml LSHFT RPAR  &kp PLUS                     &kp PRCNT  &en LBRC  &hmr RGUI RU_SEMI  &en RBRC    &hmr RCTRL EXCL
+&en HASH                 &kp STAR        &kp RU_COLON     &kp RU_FSLH      &en AMPS                     &en AT     &en PIPE  &kp RU_COMMA       &kp RU_DOT  &kp RU_QMARK
+                                                          &trans           &mo 5      &trans    &trans  &none      &trans
             >;
 
             display-name = "Symbols";
@@ -252,10 +252,10 @@
 
         nav {
             bindings = <
-  &kp N1          &kp N2    &kp N3    &kp N4     &kp N5                        &kp N6           &kp N7           &kp N8          &kp N9        &kp N0
-  &hml LCTRL ESC  &kp LALT  &kp LGUI  &kp LSHFT  &kp ENTER                     &kp PRINTSCREEN  &hmr RSHFT LEFT  &hmr RGUI DOWN  &hmr LALT UP  &hmr RCTRL RIGHT
-  &layer_en       &kp HOME  &kp INS   &kp END    &kp DELETE                    &kp CAPS         &none            &kp PG_DN       &kp PG_UP     &layer_ru
-                                      &trans     &none       &trans    &trans  &mo 5            &trans
+&kp ESC         &kp HOME            &kp UP          &kp END           &kp PAGE_UP                      &kp N0     &kp N1         &kp N2        &kp N3      &kp KP_COMMA
+&hml LCTRL TAB  &hml LEFT_ALT LEFT  &hml LGUI DOWN  &hml LSHFT RIGHT  &kp PAGE_DOWN                    &kp MINUS  &hmr RSHFT N4  &hmr RGUI N5  &hmr N6 UP  &hmr RCTRL KP_DIVIDE
+&kp LG(Z)       &kp LG(X)           &kp LG(C)       &kp LG(V)         &kp DELETE                       &kp PLUS   &kp N7         &kp N8        &kp N9      &kp STAR
+                                                    &trans            &none          &trans    &trans  &mo 5      &kp EQUAL
             >;
 
             display-name = "Nav";
@@ -263,41 +263,32 @@
 
         adj {
             bindings = <
-  &bootloader  &kp F1        &kp F2        &kp F3         &kp F4                     &bt BT_SEL 0  &bt BT_SEL 1         &bt BT_SEL 2      &bt BT_SEL 3        &bt BT_CLR
-  &kp LCTRL    &hml LALT F5  &hml LGUI F6  &hml LSHFT F7  &kp F8                     &out OUT_BLE  &hmr RSHFT C_VOL_DN  &hmr RGUI C_MUTE  &hmr LALT C_VOL_UP  &kp RCTRL
-  &to 6        &kp F9        &kp F10       &kp F11        &kp F12                    &out OUT_USB  &kp C_PREV           &kp C_PP          &kp C_NEXT          &studio_unlock
-                                           &trans         &trans   &trans    &trans  &trans        &trans
+&bootloader  &kp F1        &kp F2        &kp F3         &kp F4                     &bt BT_SEL 0  &bt BT_SEL 1         &bt BT_SEL 2      &bt BT_SEL 3        &bt BT_CLR
+&kp LCTRL    &hml LALT F5  &hml LGUI F6  &hml LSHFT F7  &kp F8                     &out OUT_BLE  &hmr RSHFT C_VOL_DN  &hmr RGUI C_MUTE  &hmr LALT C_VOL_UP  &kp RCTRL
+&to 6        &kp F9        &kp F10       &kp F11        &kp F12                    &out OUT_USB  &kp C_PREV           &kp C_PP          &kp C_NEXT          &studio_unlock
+                                         &trans         &trans   &trans    &trans  &trans        &trans
             >;
 
             display-name = "Adjust";
         };
 
-        add_1 {
+        game {
             bindings = <
-  &mt ESC TAB  &kp Q  &kp W  &kp E         &kp R                          &kp T  &none     &kp UP    &none            &kp ESC
-  &kp LSHFT    &kp A  &kp S  &kp D         &kp F                          &kp G  &kp LEFT  &kp DOWN  &kp RIGHT_ARROW  &none
-  &kp LCTRL    &kp Z  &kp X  &kp C         &kp V                          &kp B  &none     &none     &none            &to 0
-                             &kp LEFT_ALT  &mo 4  &kp SPACE    &kp ENTER  &mo 5  &kp RGUI
+&kp TAB    &kp Q  &kp W  &kp E         &kp R                          &kp T  &none     &kp UP    &none            &kp ESC
+&kp LSHFT  &kp A  &kp S  &kp D         &kp F                          &kp G  &kp LEFT  &kp DOWN  &kp RIGHT_ARROW  &none
+&kp LCTRL  &kp Z  &kp X  &kp C         &kp V                          &kp B  &none     &none     &none            &tog 6
+                         &kp LEFT_ALT  &mo 4  &kp SPACE    &kp ENTER  &mo 5  &kp RGUI
             >;
 
             label = "Gaming";
         };
 
-        add_2 {
-            bindings = <
-  &trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
-  &trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
-  &trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
-                          &trans  &trans  &trans    &trans  &trans  &trans
-            >;
-        };
-
         mouse {
             bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&mo 9      &mkp MB3   &mkp MB2   &mkp MB1   &mo 10     &mo 10     &mkp MB1   &mkp MB2   &mkp MB3   &mo 9    
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-                    &trans   &trans   &trans     &trans   &trans   &trans
+&trans  &trans     &trans     &trans     &trans                    &trans  &trans  &trans  &trans  &trans
+&mo 8   &mkp RCLK  &mkp MCLK  &mkp LCLK  &trans                    &trans  &trans  &trans  &trans  &trans
+&trans  &trans     &trans     &trans     &trans                    &trans  &trans  &trans  &trans  &trans
+                              &trans     &trans  &trans    &trans  &trans  &trans
             >;
 
             display-name = "Mouse";
@@ -305,30 +296,22 @@
 
         scroll {
             bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans     &mkp MB3   &mkp MB2   &mkp MB1   &trans     &trans     &mkp MB1   &mkp MB2   &mkp MB3   &trans   
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-                    &trans   &trans   &trans     &trans   &trans   &trans
+&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
+                        &trans  &trans  &trans    &trans  &trans  &trans
             >;
 
             display-name = "Scroll";
-        };
-
-        sniper {
-            bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans     &mkp MB3   &mkp MB2   &mkp MB1   &trans     &trans     &mkp MB1   &mkp MB2   &mkp MB3   &trans   
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-                    &trans   &trans   &trans     &trans   &trans   &trans
-            >;
-
-            display-name = "Sniper";
         };
     };
 };
 
 &trackball_listener {
-    input-processors = <&zip_auto_mouse 8 500>, <&pointer_accel>, <&xy_fine 2 5>;
+    input-processors =
+        <&zip_auto_mouse 8 500>,
+        <&pointer_accel>,
+        <&xy_fine 2 5>;
 
     scroller {
         layers = <9>;
@@ -345,6 +328,4 @@
     };
 };
 
-&mkp_input_listener {
-    input-processors = <&zip_auto_mouse 8 500>;
-};
+&mkp_input_listener { input-processors = <&zip_auto_mouse 8 500>; };
