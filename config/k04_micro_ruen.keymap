@@ -124,8 +124,8 @@
             compatible = "zmk,input-processor-temp-layer-keep";
             #input-processor-cells = <2>;
             require-prior-idle-ms = <300>;
-            excluded-positions = <10 11 12 13 14>;
-            keep-active-while-layers = <8>;
+            excluded-positions = <0 10 11 12 13 20>;
+            keep-active-while-layers = <8 9 10>;
         };
 
         hml: home_row_mod_left {
@@ -437,6 +437,8 @@
                         &trans  &trans  &trans    &trans  &trans  &trans
                                         &trans    &trans
             >;
+
+            display-name = "Gestures_1";
         };
 
         gest_2 {
@@ -447,6 +449,8 @@
                         &trans  &trans  &trans    &trans  &trans  &trans
                                         &trans    &trans
             >;
+
+            display-name = "Gestures_2";
         };
     };
 };
