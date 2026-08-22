@@ -6,6 +6,8 @@ manifest:
       url-base: https://github.com/oleksandrmaslov
     - name: kjtvfvrndr-sketch
       url-base: https://github.com/kjtvfvrndr-sketch
+    - name: kot149
+      url-base: https://github.com/kot149
   projects:
     - name: ergohaven-zmk
       remote: ergohaven
@@ -20,5 +22,8 @@ manifest:
     - name: zmk-temp-layer-keep
       remote: kjtvfvrndr-sketch
       revision: main
+    - name: zmk-mouse-gesture
+      remote: kot149
+      revision: v1
   self:
     path: config
