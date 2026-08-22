@@ -8,8 +8,8 @@
 #include <input/processors.dtsi>
 #include <zephyr/dt-bindings/input/input-event-codes.h>
 #include <behaviors/input_gestures_accel.dtsi>
-#include <behaviors.dtsi>
 #include <dt-bindings/zmk/mouse-gesture.h>
+#include <behaviors.dtsi>
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/outputs.h>
@@ -49,10 +49,25 @@
         movement-threshold = <2>;
         gesture-cooldown-ms = <250>;
 
-        gu { pattern = <GESTURE_UP>;    bindings = <&gl_1_u>; };
-        gd { pattern = <GESTURE_DOWN>;  bindings = <&gl_1_d>; };
-        gl { pattern = <GESTURE_LEFT>;  bindings = <&gl_1_l>; };
-        gr { pattern = <GESTURE_RIGHT>; bindings = <&gl_1_r>; };
+        gu {
+            pattern = <GESTURE_UP>;
+            bindings = <&gl_1_u>;
+        };
+
+        gd {
+            pattern = <GESTURE_DOWN>;
+            bindings = <&gl_1_d>;
+        };
+
+        gl {
+            pattern = <GESTURE_LEFT>;
+            bindings = <&gl_1_l>;
+        };
+
+        gr {
+            pattern = <GESTURE_RIGHT>;
+            bindings = <&gl_1_r>;
+        };
     };
 
     gest_layer_2: gest_layer_2 {
@@ -65,10 +80,25 @@
         movement-threshold = <2>;
         gesture-cooldown-ms = <250>;
 
-        gu { pattern = <GESTURE_UP>;    bindings = <&gl_2_u>; };
-        gd { pattern = <GESTURE_DOWN>;  bindings = <&gl_2_d>; };
-        gl { pattern = <GESTURE_LEFT>;  bindings = <&gl_2_l>; };
-        gr { pattern = <GESTURE_RIGHT>; bindings = <&gl_2_r>; };
+        gu {
+            pattern = <GESTURE_UP>;
+            bindings = <&gl_2_u>;
+        };
+
+        gd {
+            pattern = <GESTURE_DOWN>;
+            bindings = <&gl_2_d>;
+        };
+
+        gl {
+            pattern = <GESTURE_LEFT>;
+            bindings = <&gl_2_l>;
+        };
+
+        gr {
+            pattern = <GESTURE_RIGHT>;
+            bindings = <&gl_2_r>;
+        };
     };
 };
 
@@ -167,7 +197,7 @@
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             display-name = "Gesture Up (1)";
-            bindings = <&none>;
+            bindings = <&kp LC(UP)>;
             wait-ms = <0>;
             tap-ms = <30>;
         };
@@ -185,7 +215,7 @@
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             display-name = "Gesture Left (1)";
-            bindings = <&none>;
+            bindings = <&kp LG(C)>;
             wait-ms = <0>;
             tap-ms = <30>;
         };
@@ -194,7 +224,7 @@
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             display-name = "Gesture Right (1)";
-            bindings = <&none>;
+            bindings = <&kp LG(V)>;
             wait-ms = <0>;
             tap-ms = <30>;
         };
@@ -203,7 +233,7 @@
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             display-name = "Gesture Up (2)";
-            bindings = <&none>;
+            bindings = <&kp LS(LC(TAB))>;
             wait-ms = <0>;
             tap-ms = <30>;
         };
@@ -212,7 +242,7 @@
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             display-name = "Gesture Down (2)";
-            bindings = <&none>;
+            bindings = <&kp LC(TAB)>;
             wait-ms = <0>;
             tap-ms = <30>;
         };
@@ -221,7 +251,7 @@
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             display-name = "Gesture Left (2)";
-            bindings = <&none>;
+            bindings = <&kp LG(W)>;
             wait-ms = <0>;
             tap-ms = <30>;
         };
@@ -230,7 +260,7 @@
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             display-name = "Gesture Right (2)";
-            bindings = <&none>;
+            bindings = <&kp LG(T)>;
             wait-ms = <0>;
             tap-ms = <30>;
         };
@@ -346,9 +376,9 @@
 
         nav {
             bindings = <
-&kp ESC         &kp HOME            &kp UP          &kp END           &kp PAGE_UP                      &kp N0     &kp N1         &kp N2        &kp N3      &kp KP_COMMA
+&kp ESC         &kp HOME            &kp UP          &kp END           &kp PAGE_UP                      &kp N0     &kp N1         &kp N2        &kp N3        &kp KP_COMMA
 &hml LCTRL TAB  &hml LEFT_ALT LEFT  &hml LGUI DOWN  &hml LSHFT RIGHT  &kp PAGE_DOWN                    &kp MINUS  &hmr RSHFT N4  &hmr RGUI N5  &hmr RALT N6  &hmr RCTRL KP_DIVIDE
-&kp LG(Z)       &kp LG(X)           &kp LG(C)       &kp LG(V)         &kp DELETE                       &kp PLUS   &kp N7         &kp N8        &kp N9      &kp STAR
+&kp LG(Z)       &kp LG(X)           &kp LG(C)       &kp LG(V)         &kp DELETE                       &kp PLUS   &kp N7         &kp N8        &kp N9        &kp STAR
                                                     &trans            &none          &trans    &trans  &mo 5      &kp EQUAL
             >;
 
@@ -379,9 +409,9 @@
 
         mouse {
             bindings = <
-&trans  &trans     &trans     &trans     &trans                    &trans  &trans  &trans  &trans  &trans
+&mo 9   &trans     &trans     &trans     &trans                    &trans  &trans  &trans  &trans  &trans
 &mo 8   &mkp RCLK  &mkp MCLK  &mkp LCLK  &trans                    &trans  &trans  &trans  &trans  &trans
-&trans  &trans     &trans     &trans     &trans                    &trans  &trans  &trans  &trans  &trans
+&mo 10  &trans     &trans     &trans     &trans                    &trans  &trans  &trans  &trans  &trans
                               &trans     &trans  &trans    &trans  &trans  &trans
             >;
 
@@ -397,6 +427,26 @@
             >;
 
             display-name = "Scroll";
+        };
+
+        gest_1 {
+            bindings = <
+&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
+                        &trans  &trans  &trans    &trans  &trans  &trans
+                                        &trans    &trans
+            >;
+        };
+
+        gest_2 {
+            bindings = <
+&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
+                        &trans  &trans  &trans    &trans  &trans  &trans
+                                        &trans    &trans
+            >;
         };
     };
 };
@@ -416,8 +466,15 @@
             <&zip_xy_to_scroll_mapper>;
     };
 
-    gestures_layer_1 { layers = <9>; input-processors = <&gest_layer_1>; };
-    gestures_layer_2 { layers = <10>; input-processors = <&gest_layer_2>; };
+    gestures_layer_1 {
+        layers = <9>;
+        input-processors = <&gest_layer_1>;
+    };
+
+    gestures_layer_2 {
+        layers = <10>;
+        input-processors = <&gest_layer_2>;
+    };
 };
 
 &mkp_input_listener { input-processors = <&zip_auto_mouse 7 500>; };
