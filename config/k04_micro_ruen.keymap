@@ -198,7 +198,7 @@
         en {
             bindings = <
 &kp Q         &kp W        &kp E        &kp R          &kp T                          &kp Y  &kp U         &kp I        &kp O        &kp P
-&hml LCTRL A  &hml LALT S  &hml LGUI D  &hml LSHFT F   &kp G                          &kp H  &hmr RSHFT J  &hmr RGUI K  &hmr LALT L  &hmr RCTRL SEMICOLON
+&hml LCTRL A  &hml LALT S  &hml LGUI D  &hml LSHFT F   &kp G                          &kp H  &hmr RSHFT J  &hmr RGUI K  &hmr RALT L  &hmr RCTRL SEMICOLON
 &kp Z         &kp X        &kp C        &kp V          &kp B                          &kp N  &kp M         &kp COMMA    &kp DOT      &kp SQT
                                         &kp BACKSPACE  &mo 4  &lg_space    &kp ENTER  &mo 2  &kp TAB
             >;
@@ -209,7 +209,7 @@
         ru {
             bindings = <
 &kp RU_CYRILLIC_SHORT_I    &kp RU_CYRILLIC_TSE         &kp RU_CYRILLIC_U         &kp RU_CYRILLIC_KA        &kp RU_CYRILLIC_IE                          &kp RU_CYRILLIC_EN  &kp RU_CYRILLIC_GHE        &kp RU_CYRILLIC_SHA       &kp RU_CYRILLIC_SHCHA     &kp RU_CYRILLIC_ZE
-&hml LCTRL RU_CYRILLIC_EF  &hml LALT RU_CYRILLIC_YERU  &hml LGUI RU_CYRILLIC_VE  &hml LSHFT RU_CYRILLIC_A  &kp RU_CYRILLIC_PE                          &kp RU_CYRILLIC_ER  &hmr RSHFT RU_CYRILLIC_O   &hmr RGUI RU_CYRILLIC_EL  &hmr LALT RU_CYRILLIC_DE  &hmr RCTRL RU_CYRILLIC_ZHE
+&hml LCTRL RU_CYRILLIC_EF  &hml LALT RU_CYRILLIC_YERU  &hml LGUI RU_CYRILLIC_VE  &hml LSHFT RU_CYRILLIC_A  &kp RU_CYRILLIC_PE                          &kp RU_CYRILLIC_ER  &hmr RSHFT RU_CYRILLIC_O   &hmr RGUI RU_CYRILLIC_EL  &hmr RALT RU_CYRILLIC_DE  &hmr RCTRL RU_CYRILLIC_ZHE
 &kp RU_CYRILLIC_YA         &kp RU_CYRILLIC_CHE         &kp RU_CYRILLIC_ES        &kp RU_CYRILLIC_EM        &kp RU_CYRILLIC_I                           &kp RU_CYRILLIC_TE  &kp RU_CYRILLIC_SOFT_SIGN  &kp RU_CYRILLIC_BE        &kp RU_CYRILLIC_YU        &kp RU_CYRILLIC_E
                                                                                  &kp BACKSPACE             &mo 4               &lg_space    &kp ENTER  &mo 3               &kp TAB
             >;
@@ -220,7 +220,7 @@
         sym_en {
             bindings = <
 &kp TILDE        &kp LT          &kp EQUAL        &kp GT           &kp GRAVE                    &kp CARET  &kp LBKT         &kp UNDER       &kp RBKT        &kp DLLR
-&hml LCTRL BSLH  &hml LALT LPAR  &hml LGUI MINUS  &hml LSHFT RPAR  &kp PLUS                     &kp PRCNT  &hmr RSHFT LBRC  &hmr RGUI SEMI  &hmr LALT RBRC  &hmr RCTRL EXCL
+&hml LCTRL BSLH  &hml LALT LPAR  &hml LGUI MINUS  &hml LSHFT RPAR  &kp PLUS                     &kp PRCNT  &hmr RSHFT LBRC  &hmr RGUI SEMI  &hmr RALT RBRC  &hmr RCTRL EXCL
 &kp HASH         &kp STAR        &kp COLON        &kp FSLH         &kp AMPS                     &kp AT     &kp PIPE         &kp COMMA       &kp DOT         &kp QMARK
                                                   &trans           &mo 5      &trans    &trans  &none      &trans
             >;
@@ -242,7 +242,7 @@
         nav {
             bindings = <
 &kp ESC         &kp HOME            &kp UP          &kp END           &kp PAGE_UP                      &kp N0     &kp N1         &kp N2        &kp N3      &kp KP_COMMA
-&hml LCTRL TAB  &hml LEFT_ALT LEFT  &hml LGUI DOWN  &hml LSHFT RIGHT  &kp PAGE_DOWN                    &kp MINUS  &hmr RSHFT N4  &hmr RGUI N5  &hmr N6 UP  &hmr RCTRL KP_DIVIDE
+&hml LCTRL TAB  &hml LEFT_ALT LEFT  &hml LGUI DOWN  &hml LSHFT RIGHT  &kp PAGE_DOWN                    &kp MINUS  &hmr RSHFT N4  &hmr RGUI N5  &hmr RALT N6  &hmr RCTRL KP_DIVIDE
 &kp LG(Z)       &kp LG(X)           &kp LG(C)       &kp LG(V)         &kp DELETE                       &kp PLUS   &kp N7         &kp N8        &kp N9      &kp STAR
                                                     &trans            &none          &trans    &trans  &mo 5      &kp EQUAL
             >;
@@ -253,7 +253,7 @@
         adj {
             bindings = <
 &bootloader  &kp F1        &kp F2        &kp F3         &kp F4                     &bt BT_SEL 0  &bt BT_SEL 1         &bt BT_SEL 2      &bt BT_SEL 3        &bt BT_CLR
-&kp LCTRL    &hml LALT F5  &hml LGUI F6  &hml LSHFT F7  &kp F8                     &out OUT_BLE  &hmr RSHFT C_VOL_DN  &hmr RGUI C_MUTE  &hmr LALT C_VOL_UP  &kp RCTRL
+&kp LCTRL    &hml LALT F5  &hml LGUI F6  &hml LSHFT F7  &kp F8                     &out OUT_BLE  &hmr RSHFT C_VOL_DN  &hmr RGUI C_MUTE  &hmr RALT C_VOL_UP  &kp RCTRL
 &to 6        &kp F9        &kp F10       &kp F11        &kp F12                    &out OUT_USB  &kp C_PREV           &kp C_PP          &kp C_NEXT          &studio_unlock
                                          &trans         &trans   &trans    &trans  &trans        &trans
             >;
@@ -298,7 +298,7 @@
 
 &trackball_listener {
     input-processors =
-        <&zip_auto_mouse 8 500>,
+        <&zip_auto_mouse 7 500>,
         <&pointer_accel>,
         <&xy_fine 2 5>;
 
@@ -312,4 +312,4 @@
     };
 };
 
-&mkp_input_listener { input-processors = <&zip_auto_mouse 8 500>; };
+&mkp_input_listener { input-processors = <&zip_auto_mouse 7 500>; };
