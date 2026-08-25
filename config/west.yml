@@ -25,5 +25,8 @@ manifest:
     - name: zmk-mouse-gesture
       remote: kot149
       revision: v1
+    - name: zmk-rgbled-widget
+      remote: kjtvfvrndr-sketch
+      revision: main
   self:
     path: config

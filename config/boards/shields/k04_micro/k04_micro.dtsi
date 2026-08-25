@@ -2,6 +2,7 @@
 #include <dt-bindings/pinctrl/nrf-pinctrl.h>
 #include <zephyr/dt-bindings/input/input-event-codes.h>
 #include "k04_micro_layout.dtsi"
+#include <zephyr/dt-bindings/led/led.h>
 
 / {
     chosen {
@@ -99,5 +100,82 @@ RC(2,4) RC(2,3) RC(2,2) RC(2,1) RC(2,0)    RC(2,6) RC(2,7) RC(2,8) RC(2,9) RC(2,
 / {
     leds {
         status = "disabled";
+    };
+};
+
+/*
+ * WS2812-совместимый диод, один на половину, data на P0.30.
+ * Пин подтверждён по RMK: rmk/keyboards/k04/src/{central,left,right,
+ * peripheral}.rs — во всех четырёх ролях
+ *     SequencePwm::new_1ch(p.PWM0, p.P0_30, config)
+ * Порядок байт GRB — из send_color() в layer_led.rs, где буфер [g, r, b].
+ *
+ * ВАЖНО: используется SPI-бэкенд, а не GPIO. В Zephyr 3.5 (который тянет
+ * ZMK v0.3.0) драйвер ws2812_gpio объявлен как
+ *     config WS2812_STRIP_GPIO
+ *         depends on SOC_SERIES_NRF51X
+ * то есть на nRF52840 его включить нельзя — Kconfig просто не даст.
+ *
+ * spi1 выбран сознательно, не spi3: у SPIM3 на nRF52840 есть известная
+ * аномалия с повышенным током покоя после передачи, а для батарейной
+ * половины это лишний риск. spi1 — обычный SPIM, максимум 8 МГц, нам
+ * нужно 4 МГц. Плата его нигде не занимает (i2c0 сидит на TWI0, трекбол
+ * на spi0).
+ */
+&pinctrl {
+    spi1_default: spi1_default {
+        group1 {
+            /* SCK не выводится наружу: для WS2812 нужен только MOSI, а
+               драйвер spi_nrfx_spim корректно обрабатывает
+               nrfy_spim_sck_pin_get() < 0. Это экономит свободный пин и
+               убирает паразитные 4 МГц на плате. */
+            psels = <NRF_PSEL(SPIM_MOSI, 0, 30)>,
+                    <NRF_PSEL_DISCONNECTED(SPIM_SCK)>;
+        };
+    };
+
+    spi1_sleep: spi1_sleep {
+        group1 {
+            psels = <NRF_PSEL(SPIM_MOSI, 0, 30)>,
+                    <NRF_PSEL_DISCONNECTED(SPIM_SCK)>;
+            low-power-enable;
+        };
+    };
+};
+
+&spi1 {
+    status = "okay";
+    compatible = "nordic,nrf-spim";
+    pinctrl-0 = <&spi1_default>;
+    pinctrl-1 = <&spi1_sleep>;
+    pinctrl-names = "default", "sleep";
+
+    led_strip: ws2812@0 {
+        compatible = "worldsemi,ws2812-spi";
+        reg = <0>;
+
+        /* Тайминг. На 4 МГц один бит SPI = 250 нс.
+           spi-zero-frame 0x40 = 0b01000000 -> T0H 250 нс (спек 200-500)
+           spi-one-frame  0x70 = 0b01110000 -> T1H 750 нс (спек 550-850)
+           Период байта 2 мкс против номинальных 1.25 мкс — WS2812 это
+           терпит, порог сброса ~50 мкс. Это же сочетание используется в
+           штатных примерах Zephyr.
+           4 МГц — валидная частота SPIM на nRF52840 (ряд дискретный:
+           125k/250k/500k/1M/2M/4M/8M). */
+        spi-max-frequency = <4000000>;
+        spi-one-frame = <0x70>;
+        spi-zero-frame = <0x40>;
+
+        chain-length = <1>;
+        color-mapping = <LED_COLOR_ID_GREEN
+                         LED_COLOR_ID_RED
+                         LED_COLOR_ID_BLUE>;
+        reset-delay = <280>;
+    };
+};
+
+/ {
+    aliases {
+        led-strip = &led_strip;
     };
 };
