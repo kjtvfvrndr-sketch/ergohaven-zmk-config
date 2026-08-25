@@ -154,8 +154,13 @@ include:
   - board: ergohaven
     shield: settings_reset
 
+  # - board: ergohaven
+  #   shield: k04_micro_left
   - board: ergohaven
     shield: k04_micro_left
+    snippet: zmk-usb-logging
+    cmake-args: -DCONFIG_LOG_MAX_LEVEL=4
+    artifact-name: k04_micro_left_debug
   - board: ergohaven
     shield: k04_micro_right
     keymap: k04_micro_ruen
