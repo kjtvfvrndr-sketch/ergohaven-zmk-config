@@ -3,6 +3,7 @@
 #include <zephyr/dt-bindings/input/input-event-codes.h>
 #include "k04_micro_layout.dtsi"
 #include <zephyr/dt-bindings/led/led.h>
+#include <behaviors/rgbled_widget.dtsi>
 
 / {
     chosen {
