@@ -459,15 +459,6 @@
         <&pointer_accel>,
         <&xy_fine 2 5>;
 
-    scroller {
-        layers = <8>;
-        input-processors =
-            <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,
-            <&accel_scroll>,
-            <&xy_fine 1 100>,
-            <&zip_xy_to_scroll_mapper>;
-    };
-
     gestures_layer_1 {
         layers = <9>;
         input-processors = <&gest_layer_1>;
@@ -476,6 +467,15 @@
     gestures_layer_2 {
         layers = <10>;
         input-processors = <&gest_layer_2>;
+    };
+
+    scroller {
+        layers = <8>;
+        input-processors =
+            <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,
+            <&accel_scroll>,
+            <&xy_fine 1 100>,
+            <&zip_xy_to_scroll_mapper>;
     };
 };
 
