@@ -376,10 +376,10 @@
 
         nav {
             bindings = <
-&kp ESC         &kp HOME            &kp UP          &kp END           &kp PAGE_UP                      &kp N0     &kp N1         &kp N2        &kp N3        &kp KP_COMMA
-&hml LCTRL TAB  &hml LEFT_ALT LEFT  &hml LGUI DOWN  &hml LSHFT RIGHT  &kp PAGE_DOWN                    &kp MINUS  &hmr RSHFT N4  &hmr RGUI N5  &hmr RALT N6  &hmr RCTRL KP_DIVIDE
-&kp LG(Z)       &kp LG(X)           &kp LG(C)       &kp LG(V)         &kp DELETE                       &kp PLUS   &kp N7         &kp N8        &kp N9        &kp STAR
-                                                    &trans            &none          &trans    &trans  &mo 5      &kp EQUAL
+&kp ESC         &kp HOME            &kp UP          &kp END           &kp PAGE_UP                      &kp STAR       &kp N1         &kp N2        &kp N3        &kp PLUS
+&hml LCTRL TAB  &hml LEFT_ALT LEFT  &hml LGUI DOWN  &hml LSHFT RIGHT  &kp PAGE_DOWN                    &kp KP_DOT     &hmr RSHFT N4  &hmr RGUI N5  &hmr RALT N6  &hmr RCTRL N0
+&kp LG(Z)       &kp LG(X)           &kp LG(C)       &kp LG(V)         &kp DELETE                       &kp KP_DIVIDE  &kp N7         &kp N8        &kp N9        &kp MINUS
+                                                    &trans            &none          &trans    &trans  &mo 5          &kp EQUAL
             >;
 
             display-name = "Nav";
@@ -390,7 +390,7 @@
 &bootloader  &kp F1        &kp F2        &kp F3         &kp F4                     &bt BT_SEL 0  &bt BT_SEL 1         &bt BT_SEL 2      &bt BT_SEL 3        &bt BT_CLR
 &kp LCTRL    &hml LALT F5  &hml LGUI F6  &hml LSHFT F7  &kp F8                     &out OUT_BLE  &hmr RSHFT C_VOL_DN  &hmr RGUI C_MUTE  &hmr RALT C_VOL_UP  &kp RCTRL
 &to 6        &kp F9        &kp F10       &kp F11        &kp F12                    &out OUT_USB  &kp C_PREV           &kp C_PP          &kp C_NEXT          &studio_unlock
-                                         &ind_bat         &trans   &trans    &trans  &trans        &trans
+                                         &ind_bat       &trans   &trans    &trans  &trans        &trans
             >;
 
             display-name = "Adjust";
@@ -409,10 +409,10 @@
 
         mouse {
             bindings = <
-&mo 9   &trans     &trans     &trans     &trans                    &trans  &trans  &trans  &trans  &trans
-&mo 8   &mkp RCLK  &mkp MCLK  &mkp LCLK  &trans                    &trans  &trans  &trans  &trans  &trans
-&mo 10  &trans     &trans     &trans     &trans                    &trans  &trans  &trans  &trans  &trans
-                              &trans     &trans  &trans    &trans  &trans  &trans
+&kp LEFT_SHIFT    &trans     &trans     &trans     &trans                    &trans  &trans  &trans  &trans  &trans
+&mo 8             &mkp MCLK  &mkp RCLK  &mkp LCLK  &trans                    &trans  &trans  &trans  &trans  &trans
+&kp LEFT_COMMAND  &trans     &trans     &trans     &trans                    &trans  &trans  &trans  &trans  &trans
+                                        &trans     &trans  &trans    &trans  &trans  &trans
             >;
 
             display-name = "Mouse";
@@ -421,7 +421,7 @@
         scroll {
             bindings = <
 &trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
+&trans  &mo 9   &mo 10  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
                         &trans  &trans  &trans    &trans  &trans  &trans
             >;
