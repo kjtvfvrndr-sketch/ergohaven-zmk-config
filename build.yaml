@@ -156,20 +156,35 @@ include:
 
   - board: ergohaven
     shield: k04_micro_left
+
   - board: ergohaven
     shield: k04_micro_right
     keymap: k04_micro_ruen
     snippet: studio-rpc-usb-uart
     cmake-args: -DCONFIG_ZMK_STUDIO=y
     artifact-name: k04_micro_right_ruen-ergohaven-zmk
+
   - board: ergohaven
     shield: k04_micro_left
     snippet: zmk-usb-logging
-    cmake-args: -DCONFIG_LOG_MAX_LEVEL=4
+    cmake-args: >-
+      -DCONFIG_ZMK_LOGGING_MINIMAL=y
     artifact-name: k04_micro_left_debug
+
   - board: ergohaven
     shield: k04_micro_right
     keymap: k04_micro_ruen
-    snippet: zmk-usb-logging
-    cmake-args: -DCONFIG_LOG_MAX_LEVEL=4
+    snippet: "studio-rpc-usb-uart;zmk-usb-logging"
+    cmake-args: >-
+      -DCONFIG_ZMK_STUDIO=y
+      -DCONFIG_ZMK_LOGGING_MINIMAL=y
+      -DCONFIG_PMW3610_ALT_LOG_LEVEL_INF=y
+      -DCONFIG_THREAD_ANALYZER=y
+      -DCONFIG_THREAD_ANALYZER_AUTO=y
+      -DCONFIG_THREAD_ANALYZER_AUTO_INTERVAL=600
+      -DCONFIG_THREAD_NAME=y
+      -DCONFIG_SYSTEM_WORKQUEUE_STACK_SIZE=3072
+      -DCONFIG_INPUT_THREAD_STACK_SIZE=1024
+      -DCONFIG_ZMK_LOW_PRIORITY_THREAD_STACK_SIZE=1024
+      -DCONFIG_ZMK_SPLIT_BLE_CENTRAL_SPLIT_RUN_STACK_SIZE=1024
     artifact-name: k04_micro_right_debug
