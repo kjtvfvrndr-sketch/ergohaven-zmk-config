@@ -12,6 +12,8 @@
 #include <behaviors.dtsi>
 #include <behaviors/split_conn_ladder.dtsi>
 #include <dt-bindings/zmk/split_conn_ladder.h>
+#include <behaviors/ble_host_link.dtsi>
+#include <dt-bindings/zmk/ble_host_link.h>
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/outputs.h>
@@ -392,7 +394,7 @@
 &bootloader  &kp F1        &kp F2        &kp F3         &kp F4                     &bt BT_SEL 0  &bt BT_SEL 1         &bt BT_SEL 2      &bt BT_SEL 3        &bt BT_CLR
 &kp LCTRL    &hml LALT F5  &hml LGUI F6  &hml LSHFT F7  &kp F8                     &out OUT_BLE  &hmr RSHFT C_VOL_DN  &hmr RGUI C_MUTE  &hmr RALT C_VOL_UP  &kp RCTRL
 &to 6        &kp F9        &kp F10       &kp F11        &kp F12                    &out OUT_USB  &kp C_PREV           &kp C_PP          &kp C_NEXT          &studio_unlock
-                                         &ind_bat       &trans   &ladder LADDER_OFF    &ladder LADDER_CYCLE  &trans        &ladder LADDER_TOG
+                                         &ind_bat       &trans   &to 11    &trans  &trans        &ladder LADDER_CYCLE
             >;
 
             display-name = "Adjust";
@@ -451,6 +453,21 @@
             >;
 
             display-name = "Gestures_2";
+        };
+
+        /* Layer 11. Host link tests: intervals in 1.25 ms units, latency in
+           connection events, ball reports in ms. Reach it with &to 11 (bind it
+           where you like, or through ZMK Studio); &to 0 on both outer thumbs
+           leaves it. */
+        ble_host_link_tests {
+            bindings = <
+&ble_host_link BLE_HOST_INTERVAL_PREV  &ble_host_link BLE_HOST_INTERVAL_NEXT  &ble_host_link BLE_HOST_INTERVAL_SET 6   &ble_host_link BLE_HOST_INTERVAL_SET 9   &ble_host_link BLE_HOST_INTERVAL_SET 12                                              &bt BT_SEL 0                                                         &bt BT_SEL 1                                                         &bt BT_SEL 2                                                         &bt BT_SEL 3                                                 &out OUT_BLE
+&ble_host_link BLE_HOST_LATENCY_PREV   &ble_host_link BLE_HOST_LATENCY_NEXT   &ble_host_link BLE_HOST_LATENCY_SET 0    &ble_host_link BLE_HOST_LATENCY_SET 30   &ble_host_link BLE_HOST_LATENCY_SET BLE_HOST_LATENCY_AUTO                            &ble_host_link BLE_HOST_INTERVAL_SET BLE_HOST_INTERVAL_RANGE(9, 21)  &ble_host_link BLE_HOST_INTERVAL_SET BLE_HOST_INTERVAL_RANGE(10, 22)  &ble_host_link BLE_HOST_INTERVAL_SET BLE_HOST_INTERVAL_RANGE(11, 23)  &ble_host_link BLE_HOST_INTERVAL_SET BLE_HOST_INTERVAL_AUTO  &out OUT_USB
+&ble_host_link BALL_BLE_REPORT_PREV    &ble_host_link BALL_BLE_REPORT_NEXT    &ble_host_link BALL_BLE_REPORT_SET 4     &ble_host_link BALL_BLE_REPORT_SET 8     &ble_host_link BALL_BLE_REPORT_SET BALL_BLE_REPORT_AUTO                              &ble_host_link BLE_HOST_LINK_AUTO                                    &ble_host_link BLE_HOST_LINK_REQUEST_AGAIN                           &ble_host_link BLE_HOST_LINK_SHOW                                    &ble_host_link BLE_HOST_LINK_TYPE_REPORT                     &trans
+                                                                                                                  &to 0                                    &trans                                                               &trans                                                               &trans                                                               &trans                                                       &to 0
+            >;
+
+            display-name = "BLE host tests";
         };
     };
 };

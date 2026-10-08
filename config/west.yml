@@ -31,5 +31,8 @@ manifest:
     - name: zmk-split-conn-ladder
       remote: kjtvfvrndr-sketch
       revision: main
+    - name: zmk-ble-host-link
+      remote: kjtvfvrndr-sketch
+      revision: main
   self:
     path: config
